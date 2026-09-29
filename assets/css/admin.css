@@ -1,0 +1,20 @@
+/**
+ * Admin Styles for Emmad Video Gallery.
+ *
+ * @package Emmad_Video_Gallery
+ */
+
+.column-emmad_vg_thumb {
+	width: 80px;
+	vertical-align: middle !important;
+}
+
+.column-video_url {
+	vertical-align: middle !important;
+}
+
+.emmad-vg-settings-wrap .card {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+}

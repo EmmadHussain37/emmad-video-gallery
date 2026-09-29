@@ -1,0 +1,349 @@
+# Copyright (C) 2026 Emmad Hussain
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Emmad Video Gallery 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/EmmadHussain37/emmad-video-gallery/issues\n"
+"POT-Creation-Date: 2026-09-29 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emmad Hussain <contact@emmadhussain.com>\n"
+"Language-Team: English <en@example.com>\n"
+"X-Generator: Antigravity WP i18n Tool\n"
+"X-Domain: emmad-video-gallery\n"
+
+#. Plugin Name of the plugin
+msgid "Emmad Video Gallery"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/EmmadHussain37/emmad-video-gallery"
+msgstr ""
+
+#. Description of the plugin
+msgid "A lightweight and powerful video gallery plugin for WordPress."
+msgstr ""
+
+#. Author of the plugin
+msgid "Emmad Hussain"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/EmmadHussain37"
+msgstr ""
+
+#: includes/post-type.php:24
+msgctxt "Post type general name"
+msgid "Videos"
+msgstr ""
+
+#: includes/post-type.php:25
+msgctxt "Post type singular name"
+msgid "Video"
+msgstr ""
+
+#: includes/post-type.php:26
+msgctxt "Admin Menu text"
+msgid "Videos"
+msgstr ""
+
+#: includes/post-type.php:27
+msgctxt "Add New on Toolbar"
+msgid "Video"
+msgstr ""
+
+#: includes/post-type.php:28
+msgid "Add New"
+msgstr ""
+
+#: includes/post-type.php:29
+msgid "Add New Video"
+msgstr ""
+
+#: includes/post-type.php:30
+msgid "New Video"
+msgstr ""
+
+#: includes/post-type.php:31
+msgid "Edit Video"
+msgstr ""
+
+#: includes/post-type.php:32
+msgid "View Video"
+msgstr ""
+
+#: includes/post-type.php:33
+msgid "All Videos"
+msgstr ""
+
+#: includes/post-type.php:34
+msgid "Search Videos"
+msgstr ""
+
+#: includes/post-type.php:35
+msgid "Parent Videos:"
+msgstr ""
+
+#: includes/post-type.php:36
+#: public/shortcode.php:177
+msgid "No videos found."
+msgstr ""
+
+#: includes/post-type.php:37
+msgid "No videos found in Trash."
+msgstr ""
+
+#: includes/post-type.php:38
+msgid "Video Thumbnail"
+msgstr ""
+
+#: includes/post-type.php:39
+msgid "Set video thumbnail"
+msgstr ""
+
+#: includes/post-type.php:40
+msgid "Remove video thumbnail"
+msgstr ""
+
+#: includes/post-type.php:41
+msgid "Use as video thumbnail"
+msgstr ""
+
+#: includes/post-type.php:88
+msgctxt "taxonomy general name"
+msgid "Video Categories"
+msgstr ""
+
+#: includes/post-type.php:89
+msgctxt "taxonomy singular name"
+msgid "Video Category"
+msgstr ""
+
+#: includes/post-type.php:90
+msgid "Search Categories"
+msgstr ""
+
+#: includes/post-type.php:91
+msgid "Popular Categories"
+msgstr ""
+
+#: includes/post-type.php:92
+msgid "All Categories"
+msgstr ""
+
+#: includes/post-type.php:93
+msgid "Parent Category"
+msgstr ""
+
+#: includes/post-type.php:94
+msgid "Parent Category:"
+msgstr ""
+
+#: includes/post-type.php:95
+msgid "Edit Category"
+msgstr ""
+
+#: includes/post-type.php:96
+msgid "Update Category"
+msgstr ""
+
+#: includes/post-type.php:97
+msgid "Add New Category"
+msgstr ""
+
+#: includes/post-type.php:98
+msgid "New Category Name"
+msgstr ""
+
+#: includes/post-type.php:99
+msgid "Separate categories with commas"
+msgstr ""
+
+#: includes/post-type.php:100
+msgid "Add or remove categories"
+msgstr ""
+
+#: includes/post-type.php:101
+msgid "Choose from the most used categories"
+msgstr ""
+
+#: includes/post-type.php:102
+msgid "No categories found."
+msgstr ""
+
+#: includes/post-type.php:103
+msgid "Categories"
+msgstr ""
+
+#: admin/meta-box.php:26
+msgid "Video Details"
+msgstr ""
+
+#: admin/meta-box.php:49
+msgid "Video URL"
+msgstr ""
+
+#: admin/meta-box.php:59
+msgid "https://example.com/video.mp4 or YouTube / Vimeo URL"
+msgstr ""
+
+#: admin/meta-box.php:63
+msgid "Supports self-hosted MP4 / WebM videos, YouTube links (standard, youtu.be, shorts), and Vimeo URLs."
+msgstr ""
+
+#: admin/admin-columns.php:26
+msgid "Thumbnail"
+msgstr ""
+
+#: admin/admin-columns.php:32
+msgid "Video Source"
+msgstr ""
+
+#: admin/admin-columns.php:65
+msgid "Not Set"
+msgstr ""
+
+#: admin/admin-columns.php:70
+msgid "MP4 / File"
+msgstr ""
+
+#: admin/settings.php:25
+#: admin/settings.php:82
+msgid "Emmad Video Gallery Settings"
+msgstr ""
+
+#: admin/settings.php:26
+msgid "Settings"
+msgstr ""
+
+#: admin/settings.php:73
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: admin/settings.php:88
+msgid "Player Branding"
+msgstr ""
+
+#: admin/settings.php:90
+msgid "Configure the watermark or branding logo displayed in the top header of the fullscreen video player."
+msgstr ""
+
+#: admin/settings.php:100
+msgid "Player Logo URL"
+msgstr ""
+
+#: admin/settings.php:118
+msgid "Upload Logo"
+msgstr ""
+
+#: admin/settings.php:127
+msgid "Remove"
+msgstr ""
+
+#: admin/settings.php:132
+msgid "Recommended formats: transparent PNG, WebP, or SVG. Suggested height: 30px to 60px."
+msgstr ""
+
+#: admin/settings.php:140
+msgid "Preview on Player Background"
+msgstr ""
+
+#: admin/settings.php:144
+msgid "Player Logo Preview"
+msgstr ""
+
+#: admin/settings.php:152
+msgid "Save Changes"
+msgstr ""
+
+#: admin/settings.php:160
+msgid "Shortcode Reference"
+msgstr ""
+
+#: admin/settings.php:162
+msgid "Embed your video gallery on any page, post, or widget area using:"
+msgstr ""
+
+#: admin/settings.php:166
+msgid "Custom Attributes"
+msgstr ""
+
+#: admin/settings.php:174
+msgid "Example"
+msgstr ""
+
+#: admin/settings.php:178
+msgid "Legacy shortcode [video_gallery] continues to work seamlessly."
+msgstr ""
+
+#: public/assets.php:42
+#: assets/js/gallery.js:33
+msgid "Play"
+msgstr ""
+
+#: public/assets.php:43
+#: assets/js/gallery.js:34
+msgid "Pause"
+msgstr ""
+
+#: public/assets.php:44
+#: assets/js/gallery.js:35
+msgid "Mute"
+msgstr ""
+
+#: public/assets.php:45
+#: assets/js/gallery.js:36
+msgid "Unmute"
+msgstr ""
+
+#: public/assets.php:46
+#: public/shortcode.php:218
+#: assets/js/gallery.js:37
+msgid "Close video player"
+msgstr ""
+
+#: public/shortcode.php:68
+msgid "Video category filters"
+msgstr ""
+
+#: public/shortcode.php:69
+msgid "VIEW ALL"
+msgstr ""
+
+#: public/shortcode.php:137
+msgid "Play video: %s"
+msgstr ""
+
+#: public/shortcode.php:200
+msgid "Video Player"
+msgstr ""
+
+#: public/shortcode.php:210
+msgid "Player Logo"
+msgstr ""
+
+#: public/shortcode.php:220
+msgid "CLOSE"
+msgstr ""
+
+#: public/shortcode.php:234
+msgid "External Video Stream"
+msgstr ""
+
+#: public/shortcode.php:244
+msgid "NOW PLAYING"
+msgstr ""
+
+#: public/shortcode.php:252
+msgid "Play / Pause"
+msgstr ""
+
+#: public/shortcode.php:274
+msgid "Video progress seek bar"
+msgstr ""
+
+#: public/shortcode.php:288
+msgid "Mute / Unmute"
+msgstr ""

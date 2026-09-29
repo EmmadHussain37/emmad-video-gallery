@@ -1,0 +1,544 @@
+/**
+ * Frontend Gallery Stylesheet.
+ *
+ * @package Emmad_Video_Gallery
+ */
+
+/* ==========================================
+   CSS RESET / ISOLATION FOR GALLERY
+========================================== */
+
+.vg-filters,
+.vg-gallery,
+#vg-player {
+	box-sizing: border-box;
+}
+
+.vg-filters *,
+.vg-gallery *,
+#vg-player * {
+	box-sizing: inherit;
+}
+
+/* ==========================================
+   CATEGORY FILTERS
+========================================== */
+
+.vg-filters {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 35px;
+	padding: 0;
+	list-style: none;
+}
+
+.vg-filters button {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	font-family: inherit;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 8px 6px;
+	min-height: 44px;
+	color: #64748b;
+	position: relative;
+	cursor: pointer;
+	transition: color 0.2s ease, opacity 0.2s ease;
+	line-height: 1.2;
+}
+
+.vg-filters button:hover,
+.vg-filters button:focus-visible {
+	color: #0f172a;
+	outline: none;
+}
+
+.vg-filters button.active {
+	color: #0f172a;
+}
+
+.vg-filters button.active::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background: #0f172a;
+	border-radius: 2px;
+}
+
+.vg-filters button:focus-visible {
+	outline: 2px solid #0284c7;
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+
+/* ==========================================
+   GALLERY GRID
+========================================== */
+
+.vg-gallery {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	width: 100%;
+}
+
+.vg-gallery.columns-1 {
+	grid-template-columns: 1fr;
+}
+
+.vg-gallery.columns-2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.vg-gallery.columns-3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.vg-gallery.columns-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.vg-gallery.columns-5 {
+	grid-template-columns: repeat(5, 1fr);
+}
+
+.vg-gallery.columns-6 {
+	grid-template-columns: repeat(6, 1fr);
+}
+
+/* ==========================================
+   GALLERY ITEMS
+========================================== */
+
+.vg-item {
+	position: relative;
+	overflow: hidden;
+	border-radius: 10px;
+	background: #09090b;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vg-item:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.vg-video {
+	display: block;
+	position: relative;
+	text-decoration: none;
+	color: inherit;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.vg-video:focus-visible {
+	outline: 3px solid #0284c7;
+	outline-offset: 3px;
+	border-radius: 10px;
+}
+
+.vg-item img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+	border: none;
+	border-radius: 10px;
+	background: #18181b;
+}
+
+.vg-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.38);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	border-radius: 10px;
+}
+
+.vg-item:hover .vg-overlay,
+.vg-video:focus-visible .vg-overlay {
+	opacity: 1;
+}
+
+.vg-item:hover img,
+.vg-video:focus-visible img {
+	transform: scale(1.06);
+}
+
+.vg-play {
+	width: 68px;
+	height: 68px;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.85);
+	background: rgba(0, 0, 0, 0.4);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease;
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+.vg-item:hover .vg-play,
+.vg-video:focus-visible .vg-play {
+	transform: scale(1.12);
+	background: rgba(0, 0, 0, 0.6);
+	border-color: #ffffff;
+}
+
+/* ==========================================
+   FULLSCREEN PLAYER MODAL
+========================================== */
+
+#vg-player {
+	position: fixed;
+	inset: 0;
+	background: #000000;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	z-index: 999999;
+}
+
+#vg-player.active {
+	opacity: 1;
+}
+
+#vg-video-player {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	background: #000000;
+}
+
+#vg-iframe-player {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	background: #000000;
+	display: none;
+}
+
+/* ==========================================
+   PLAYER HEADER
+========================================== */
+
+.vg-player-header {
+	position: absolute;
+	top: 25px;
+	left: 35px;
+	right: 35px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 70;
+	pointer-events: none;
+}
+
+.vg-player-logo {
+	display: block;
+	max-height: 48px;
+	max-width: 220px;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	pointer-events: auto;
+}
+
+.vg-close {
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 6px;
+	color: #ffffff;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	padding: 10px 18px;
+	min-height: 44px;
+	min-width: 44px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	pointer-events: auto;
+	transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	backdrop-filter: blur(4px);
+}
+
+.vg-close:hover,
+.vg-close:focus-visible {
+	background: #ffffff;
+	color: #000000;
+	border-color: #ffffff;
+	outline: none;
+}
+
+/* ==========================================
+   PLAYER CONTROLS (MP4 / Self-hosted)
+========================================== */
+
+.vg-controls {
+	position: absolute;
+	left: 35px;
+	right: 35px;
+	bottom: 30px;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: 20px;
+	color: #ffffff;
+	z-index: 70;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+	padding-top: 20px;
+}
+
+.vg-left {
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.vg-center {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.vg-right {
+	text-align: right;
+	font-size: 15px;
+	font-weight: 500;
+	color: #ffffff;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#vg-play,
+#vg-mute {
+	background: transparent;
+	border: none;
+	border-radius: 50%;
+	color: #ffffff;
+	cursor: pointer;
+	padding: 10px;
+	min-width: 44px;
+	min-height: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s ease, transform 0.15s ease;
+}
+
+#vg-play:hover,
+#vg-mute:hover,
+#vg-play:focus-visible,
+#vg-mute:focus-visible {
+	background: rgba(255, 255, 255, 0.2);
+	outline: none;
+}
+
+#vg-current,
+#vg-duration {
+	font-size: 13px;
+	font-family: monospace;
+	font-variant-numeric: tabular-nums;
+	color: rgba(255, 255, 255, 0.85);
+	min-width: 42px;
+	text-align: center;
+}
+
+/* ==========================================
+   PROGRESS BAR & SEEKER
+========================================== */
+
+#vg-progress {
+	position: relative;
+	width: 360px;
+	height: 24px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
+#vg-progress:focus-visible {
+	outline: 2px solid #0284c7;
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+
+#vg-progress-track {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 4px;
+	background: rgba(255, 255, 255, 0.25);
+	border-radius: 999px;
+}
+
+#vg-progress-fill {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 0%;
+	height: 4px;
+	background: #38bdf8;
+	border-radius: 999px;
+}
+
+#vg-progress-thumb {
+	position: absolute;
+	left: 0%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 14px;
+	height: 14px;
+	background: #ffffff;
+	border-radius: 50%;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	transition: transform 0.1s ease;
+}
+
+#vg-progress:hover #vg-progress-thumb {
+	transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 1024px) {
+	.vg-gallery {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+	}
+
+	.vg-gallery.columns-4,
+	.vg-gallery.columns-5,
+	.vg-gallery.columns-6 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	#vg-progress {
+		width: 240px;
+	}
+}
+
+@media (max-width: 767px) {
+	.vg-gallery,
+	.vg-gallery.columns-2,
+	.vg-gallery.columns-3,
+	.vg-gallery.columns-4,
+	.vg-gallery.columns-5,
+	.vg-gallery.columns-6 {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+
+	.vg-filters {
+		gap: 8px;
+		margin-bottom: 24px;
+	}
+
+	.vg-filters button {
+		font-size: 12px;
+		letter-spacing: 1px;
+		padding: 6px 4px;
+	}
+
+	.vg-player-header {
+		top: 16px;
+		left: 16px;
+		right: 16px;
+	}
+
+	.vg-player-logo {
+		max-height: 36px;
+		max-width: 140px;
+	}
+
+	.vg-close {
+		padding: 6px 12px;
+		font-size: 10px;
+	}
+
+	.vg-controls {
+		left: 16px;
+		right: 16px;
+		bottom: 16px;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 12px;
+	}
+
+	.vg-left,
+	.vg-right {
+		width: 100%;
+		text-align: center;
+		justify-content: center;
+	}
+
+	.vg-left {
+		order: 1;
+		font-size: 11px;
+	}
+
+	.vg-right {
+		order: 2;
+		font-size: 13px;
+	}
+
+	.vg-center {
+		order: 3;
+		display: grid;
+		grid-template-columns: auto auto 1fr auto auto;
+		gap: 10px;
+		width: 100%;
+	}
+
+	#vg-progress {
+		width: 100%;
+	}
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+	.vg-item img,
+	.vg-item,
+	.vg-play,
+	.vg-overlay,
+	#vg-player {
+		transition: none !important;
+	}
+}
