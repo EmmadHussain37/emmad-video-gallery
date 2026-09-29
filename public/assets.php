@@ -90,9 +90,15 @@ if ( ! function_exists( 'emmad_admin_assets' ) ) {
 	 */
 	function emmad_admin_assets( $hook ) {
 
-		global $post_type;
-
-		$is_settings_page = ( false !== strpos( $hook, 'emmad-video-gallery-settings' ) );
+		$current_page     = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+		$is_settings_page = (
+			false !== strpos( $hook, 'emmad-video-gallery-settings' ) ||
+			false !== strpos( $hook, 'emmad-vg-settings' ) ||
+			false !== strpos( $hook, 'ehvg-settings' ) ||
+			'emmad-video-gallery-settings' === $current_page ||
+			'emmad-vg-settings' === $current_page ||
+			'ehvg-settings' === $current_page
+		);
 		$is_video_cpt     = ( 'vg_video' === $post_type );
 
 		if ( ! $is_settings_page && ! $is_video_cpt ) {

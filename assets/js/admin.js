@@ -7,24 +7,30 @@
 jQuery(document).ready(function ($) {
 	'use strict';
 
-	// Cache selectors.
-	var $inputField   = $('#emmad_vg_player_logo, #ehvg_player_logo, #vg_player_logo');
-	var $uploadBtn    = $('#emmad_vg_upload_logo, #ehvg-upload-logo, #vg-upload-logo');
-	var $removeBtn    = $('#emmad_vg_remove_logo');
-	var $previewWrap  = $('#emmad_vg_logo_preview_wrap');
-	var $previewImg   = $('#emmad_vg_logo_preview');
+	var fileFrame;
 
-	if (!$uploadBtn.length) {
-		return;
-	}
-
-	$uploadBtn.on('click', function (e) {
+	// Media upload handler.
+	$(document).on('click', '#emmad_upload_logo, #emmad_vg_upload_logo, #ehvg-upload-logo, #vg-upload-logo', function (e) {
 		e.preventDefault();
 
-		var frame = wp.media({
-			title: 'Select Player Logo',
+		if (typeof wp === 'undefined' || !wp.media) {
+			return;
+		}
+
+		if (fileFrame) {
+			fileFrame.open();
+			return;
+		}
+
+		var i18n = window.emmadAdminData || {
+			mediaTitle: 'Select Player Logo',
+			mediaButton: 'Use Selected Logo'
+		};
+
+		fileFrame = wp.media({
+			title: i18n.mediaTitle,
 			button: {
-				text: 'Use Selected Logo'
+				text: i18n.mediaButton
 			},
 			multiple: false,
 			library: {
@@ -32,28 +38,31 @@ jQuery(document).ready(function ($) {
 			}
 		});
 
-		frame.on('select', function () {
-			var attachment = frame.state().get('selection').first().toJSON();
+		fileFrame.on('select', function () {
+			var attachment = fileFrame.state().get('selection').first().toJSON();
 
 			if (attachment && attachment.url) {
-				$inputField.val(attachment.url);
+				$('#emmad_player_logo, #emmad_vg_player_logo, #ehvg_player_logo, #vg_player_logo').val(attachment.url);
 
-				if ($previewImg.length) {
-					$previewImg.attr('src', attachment.url);
-					$previewWrap.show();
-					$removeBtn.show();
+				var $preview = $('#emmad_logo_preview, #emmad_vg_logo_preview');
+				if ($preview.length) {
+					$preview.attr('src', attachment.url);
 				}
+
+				$('#emmad_logo_preview_wrap, #emmad_vg_logo_preview_wrap').show();
+				$('#emmad_remove_logo, #emmad_vg_remove_logo').show();
 			}
 		});
 
-		frame.open();
+		fileFrame.open();
 	});
 
-	$removeBtn.on('click', function (e) {
+	// Remove logo handler.
+	$(document).on('click', '#emmad_remove_logo, #emmad_vg_remove_logo', function (e) {
 		e.preventDefault();
-		$inputField.val('');
-		$previewWrap.hide();
-		$previewImg.attr('src', '');
+		$('#emmad_player_logo, #emmad_vg_player_logo, #ehvg_player_logo, #vg_player_logo').val('');
+		$('#emmad_logo_preview_wrap, #emmad_vg_logo_preview_wrap').hide();
+		$('#emmad_logo_preview, #emmad_vg_logo_preview').attr('src', '');
 		$(this).hide();
 	});
 });
