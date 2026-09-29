@@ -5,91 +5,53 @@
  */
 
 /* ==========================================
-   CSS RESET / ISOLATION FOR GALLERY
-========================================== */
-
-.vg-filters,
-.vg-gallery,
-#vg-player {
-	box-sizing: border-box;
-}
-
-.vg-filters *,
-.vg-gallery *,
-#vg-player * {
-	box-sizing: inherit;
-}
-
-/* ==========================================
-   CATEGORY FILTERS
+   VIDEO GALLERY
 ========================================== */
 
 .vg-filters {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: center;
+	justify-content: left;
 	gap: 12px;
-	margin-bottom: 35px;
-	padding: 0;
-	list-style: none;
+	margin-bottom: 40px;
 }
 
 .vg-filters button {
-	background: transparent;
+	background: none;
 	border: none;
-	border-radius: 0;
-	box-shadow: none;
-	font-family: inherit;
 	font-size: 13px;
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	padding: 8px 6px;
-	min-height: 44px;
-	color: #64748b;
+	padding: 0 5px;
+	color: #777;
 	position: relative;
 	cursor: pointer;
-	transition: color 0.2s ease, opacity 0.2s ease;
-	line-height: 1.2;
-}
-
-.vg-filters button:hover,
-.vg-filters button:focus-visible {
-	color: #0f172a;
-	outline: none;
 }
 
 .vg-filters button.active {
-	color: #0f172a;
+	color: white;
 }
 
 .vg-filters button.active::after {
 	content: "";
 	position: absolute;
 	left: 0;
-	bottom: 0;
+	bottom: -8px;
 	width: 100%;
-	height: 2px;
-	background: #0f172a;
-	border-radius: 2px;
+	height: 1px;
+	background: grey;
 }
 
-.vg-filters button:focus-visible {
-	outline: 2px solid #0284c7;
-	outline-offset: 4px;
-	border-radius: 4px;
-}
 
 /* ==========================================
-   GALLERY GRID
+   GRID
 ========================================== */
 
 .vg-gallery {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 24px;
-	width: 100%;
+	gap: 25px;
 }
 
 .vg-gallery.columns-1 {
@@ -116,6 +78,7 @@
 	grid-template-columns: repeat(6, 1fr);
 }
 
+
 /* ==========================================
    GALLERY ITEMS
 ========================================== */
@@ -123,99 +86,76 @@
 .vg-item {
 	position: relative;
 	overflow: hidden;
-	border-radius: 10px;
-	background: #09090b;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.vg-item:hover {
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-}
-
-.vg-video {
-	display: block;
-	position: relative;
-	text-decoration: none;
-	color: inherit;
-	overflow: hidden;
-	cursor: pointer;
-}
-
-.vg-video:focus-visible {
-	outline: 3px solid #0284c7;
-	outline-offset: 3px;
-	border-radius: 10px;
+	border-radius: 8px;
+	background: #000;
 }
 
 .vg-item img {
 	display: block;
 	width: 100%;
-	aspect-ratio: 16 / 9;
+	aspect-ratio: 16/9;
 	object-fit: cover;
-	transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-	border: none;
-	border-radius: 10px;
-	background: #18181b;
+	transition: .5s;
 }
 
 .vg-overlay {
 	position: absolute;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.38);
+	background: rgba(0, 0, 0, .35);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	opacity: 0;
-	transition: opacity 0.3s ease;
-	border-radius: 10px;
+	transition: .35s;
 }
 
-.vg-item:hover .vg-overlay,
-.vg-video:focus-visible .vg-overlay {
+.vg-item:hover .vg-overlay {
 	opacity: 1;
 }
 
-.vg-item:hover img,
-.vg-video:focus-visible img {
-	transform: scale(1.06);
+.vg-item:hover img {
+	transform: scale(1.08);
 }
 
 .vg-play {
-	width: 68px;
-	height: 68px;
+	width: 74px;
+	height: 74px;
 	border-radius: 50%;
-	border: 2px solid rgba(255, 255, 255, 0.85);
-	background: rgba(0, 0, 0, 0.4);
+	border: 2px solid #fff;
+	color: #fff;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease;
-	backdrop-filter: blur(6px);
-	-webkit-backdrop-filter: blur(6px);
+	font-size: 30px;
+	transition: .3s;
+	backdrop-filter: blur(4px);
 }
 
-.vg-item:hover .vg-play,
-.vg-video:focus-visible .vg-play {
+.vg-item:hover .vg-play {
 	transform: scale(1.12);
-	background: rgba(0, 0, 0, 0.6);
-	border-color: #ffffff;
 }
+
+.vg-video {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
 
 /* ==========================================
-   FULLSCREEN PLAYER MODAL
+   PLAYER
 ========================================== */
 
 #vg-player {
 	position: fixed;
 	inset: 0;
-	background: #000000;
+	background: #000;
 	display: none;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	opacity: 0;
-	transition: opacity 0.3s ease;
+	transition: .3s;
 	z-index: 999999;
 }
 
@@ -228,8 +168,8 @@
 	inset: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
-	background: #000000;
+	object-fit: cover;
+	background: #000;
 }
 
 #vg-iframe-player {
@@ -238,160 +178,106 @@
 	width: 100%;
 	height: 100%;
 	border: none;
-	background: #000000;
+	background: #000;
 	display: none;
 }
 
 /* ==========================================
-   PLAYER HEADER
+   HEADER
 ========================================== */
 
 .vg-player-header {
 	position: absolute;
-	top: 25px;
-	left: 35px;
-	right: 35px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	z-index: 70;
-	pointer-events: none;
+	top: 30px;
+	left: 40px;
+	right: 40px;
+	z-index: 50;
 }
 
 .vg-player-logo {
 	display: block;
-	max-height: 48px;
-	max-width: 220px;
-	width: auto;
+	width: 12%;
+	min-width: 180px;
+	max-width: 380px;
 	height: auto;
-	object-fit: contain;
-	pointer-events: auto;
+	margin: 0 auto;
 }
 
 .vg-close {
-	background: rgba(255, 255, 255, 0.12);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	border-radius: 6px;
-	color: #ffffff;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: none;
+	border: none;
+	color: #fff;
 	cursor: pointer;
-	font-family: inherit;
-	font-size: 11px;
-	font-weight: 700;
+	font-size: 12px;
 	letter-spacing: 2px;
 	text-transform: uppercase;
-	padding: 10px 18px;
-	min-height: 44px;
-	min-width: 44px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	pointer-events: auto;
-	transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-	backdrop-filter: blur(4px);
+	padding: 5px !important;
+	margin-top: -4px;
 }
 
-.vg-close:hover,
-.vg-close:focus-visible {
-	background: #ffffff;
-	color: #000000;
-	border-color: #ffffff;
-	outline: none;
+.vg-close:hover {
+	background: white !important;
+	color: black !important;
 }
 
 /* ==========================================
-   PLAYER CONTROLS (MP4 / Self-hosted)
+   CONTROLS
 ========================================== */
 
 .vg-controls {
 	position: absolute;
-	left: 35px;
-	right: 35px;
-	bottom: 30px;
+	left: 40px;
+	right: 40px;
+	bottom: 35px;
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
 	align-items: center;
-	gap: 20px;
-	color: #ffffff;
-	z-index: 70;
-	background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
-	padding-top: 20px;
+	color: #fff;
+	z-index: 60;
 }
 
 .vg-left {
-	font-size: 13px;
-	font-weight: 600;
-	letter-spacing: 1.5px;
+	font-size: 14px;
+	letter-spacing: 1px;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.7);
 }
 
 .vg-center {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 15px;
 }
 
 .vg-right {
 	text-align: right;
-	font-size: 15px;
-	font-weight: 500;
-	color: #ffffff;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	font-size: 18px;
 }
 
 #vg-play,
 #vg-mute {
-	background: transparent;
+	background: none;
 	border: none;
-	border-radius: 50%;
-	color: #ffffff;
+	color: #fff;
 	cursor: pointer;
-	padding: 10px;
-	min-width: 44px;
-	min-height: 44px;
+	padding: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: background 0.2s ease, transform 0.15s ease;
 }
 
-#vg-play:hover,
-#vg-mute:hover,
-#vg-play:focus-visible,
-#vg-mute:focus-visible {
-	background: rgba(255, 255, 255, 0.2);
-	outline: none;
-}
-
-#vg-current,
-#vg-duration {
-	font-size: 13px;
-	font-family: monospace;
-	font-variant-numeric: tabular-nums;
-	color: rgba(255, 255, 255, 0.85);
-	min-width: 42px;
-	text-align: center;
-}
 
 /* ==========================================
-   PROGRESS BAR & SEEKER
+   CUSTOM PROGRESS BAR
 ========================================== */
 
 #vg-progress {
 	position: relative;
-	width: 360px;
-	height: 24px;
+	width: 420px;
+	height: 14px;
 	cursor: pointer;
-	display: flex;
-	align-items: center;
-}
-
-#vg-progress:focus-visible {
-	outline: 2px solid #0284c7;
-	outline-offset: 4px;
-	border-radius: 4px;
 }
 
 #vg-progress-track {
@@ -400,8 +286,8 @@
 	right: 0;
 	top: 50%;
 	transform: translateY(-50%);
-	height: 4px;
-	background: rgba(255, 255, 255, 0.25);
+	height: 2px;
+	background: rgba(255, 255, 255, .30);
 	border-radius: 999px;
 }
 
@@ -411,8 +297,8 @@
 	top: 50%;
 	transform: translateY(-50%);
 	width: 0%;
-	height: 4px;
-	background: #38bdf8;
+	height: 2px;
+	background: #fff;
 	border-radius: 999px;
 }
 
@@ -421,36 +307,170 @@
 	left: 0%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 14px;
-	height: 14px;
-	background: #ffffff;
+	width: 12px;
+	height: 12px;
+	background: #fff;
 	border-radius: 50%;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-	transition: transform 0.1s ease;
 }
 
-#vg-progress:hover #vg-progress-thumb {
-	transform: translate(-50%, -50%) scale(1.2);
-}
 
 /* ==========================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ========================================== */
 
 @media (max-width: 1024px) {
 	.vg-gallery {
 		grid-template-columns: repeat(2, 1fr);
-		gap: 20px;
+	}
+}
+
+@media (max-width: 767px) {
+	.vg-gallery {
+		grid-template-columns: 1fr;
 	}
 
-	.vg-gallery.columns-4,
-	.vg-gallery.columns-5,
-	.vg-gallery.columns-6 {
-		grid-template-columns: repeat(3, 1fr);
+	.vg-play {
+		width: 60px;
+		height: 60px;
+		font-size: 24px;
+	}
+
+	.vg-filters {
+		gap: 6px;
+	}
+
+	.vg-filters button {
+		font-size: 13px;
+	}
+
+	.vg-player-logo {
+		width: 50%;
+		min-width: 140px;
+	}
+
+	.vg-controls {
+		left: 20px;
+		right: 20px;
+		bottom: 20px;
+		grid-template-columns: 1fr;
+		gap: 15px;
+		text-align: center;
+	}
+
+	.vg-left,
+	.vg-center,
+	.vg-right {
+		justify-content: center;
+		text-align: center;
 	}
 
 	#vg-progress {
-		width: 240px;
+		width: 220px;
+	}
+}
+
+
+/* ==========================================
+   MOBILE PLAYER
+========================================== */
+
+@media (max-width: 767px) {
+	.vg-gallery {
+		grid-template-columns: 1fr;
+	}
+
+	.vg-play {
+		width: 60px;
+		height: 60px;
+		font-size: 24px;
+	}
+
+	.vg-filters {
+		gap: 6px;
+	}
+
+	.vg-filters button {
+		font-size: 13px;
+	}
+
+	/* PLAYER HEADER */
+	.vg-player-header {
+		top: 22px;
+		left: 20px;
+		right: 20px;
+	}
+
+	.vg-player-logo {
+		width: 45%;
+		min-width: 150px;
+		max-width: 220px;
+		margin: 0;
+	}
+
+	.vg-close {
+		top: 0;
+		right: 0;
+		font-size: 12px;
+		letter-spacing: 2px;
+	}
+
+	/* VIDEO */
+	#vg-video-player {
+		object-fit: cover;
+	}
+
+	/* CONTROLS */
+	.vg-controls {
+		left: 20px;
+		right: 20px;
+		bottom: 22px;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 16px;
+	}
+
+	.vg-left,
+	.vg-right {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 13px;
+	}
+
+	.vg-right {
+		order: 2;
+		text-align: right;
+	}
+
+	.vg-left {
+		order: 1;
+	}
+
+	.vg-center {
+		order: 3;
+		display: grid;
+		grid-template-columns: auto auto 1fr auto auto;
+		align-items: center;
+		gap: 12px;
+		width: 100%;
+	}
+
+	#vg-current,
+	#vg-duration {
+		font-size: 14px;
+		white-space: nowrap;
+	}
+
+	#vg-progress {
+		width: 100%;
+	}
+
+	#vg-play svg,
+	#vg-mute svg {
+		width: 18px;
+		height: 18px;
 	}
 }
 
@@ -461,84 +481,6 @@
 	.vg-gallery.columns-4,
 	.vg-gallery.columns-5,
 	.vg-gallery.columns-6 {
-		grid-template-columns: 1fr;
-		gap: 16px;
-	}
-
-	.vg-filters {
-		gap: 8px;
-		margin-bottom: 24px;
-	}
-
-	.vg-filters button {
-		font-size: 12px;
-		letter-spacing: 1px;
-		padding: 6px 4px;
-	}
-
-	.vg-player-header {
-		top: 16px;
-		left: 16px;
-		right: 16px;
-	}
-
-	.vg-player-logo {
-		max-height: 36px;
-		max-width: 140px;
-	}
-
-	.vg-close {
-		padding: 6px 12px;
-		font-size: 10px;
-	}
-
-	.vg-controls {
-		left: 16px;
-		right: 16px;
-		bottom: 16px;
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		gap: 12px;
-	}
-
-	.vg-left,
-	.vg-right {
-		width: 100%;
-		text-align: center;
-		justify-content: center;
-	}
-
-	.vg-left {
-		order: 1;
-		font-size: 11px;
-	}
-
-	.vg-right {
-		order: 2;
-		font-size: 13px;
-	}
-
-	.vg-center {
-		order: 3;
-		display: grid;
-		grid-template-columns: auto auto 1fr auto auto;
-		gap: 10px;
-		width: 100%;
-	}
-
-	#vg-progress {
-		width: 100%;
-	}
-}
-
-/* Prefers Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-	.vg-item img,
-	.vg-item,
-	.vg-play,
-	.vg-overlay,
-	#vg-player {
-		transition: none !important;
+		grid-template-columns: 1fr !important;
 	}
 }

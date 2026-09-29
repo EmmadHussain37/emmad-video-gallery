@@ -218,11 +218,13 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 
 				<div class="vg-player-header">
 
+					<?php if ( ! empty( $logo_url ) ) : ?>
 					<img
 						class="vg-player-logo"
 						src="<?php echo esc_url( $logo_url ); ?>"
 						alt="<?php esc_attr_e( 'Player Logo', 'emmad-video-gallery' ); ?>"
 					/>
+					<?php endif; ?>
 
 					<button
 						type="button"
