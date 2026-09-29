@@ -90,10 +90,12 @@ if ( ! function_exists( 'emmad_admin_assets' ) ) {
 	 */
 	function emmad_admin_assets( $hook ) {
 
+		global $post_type;
+
 		$current_page     = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 		$is_settings_page = (
 			false !== strpos( $hook, 'emmad-video-gallery-settings' ) ||
-			false !== strpos( $hook, 'emmad-vg-settings' ) ||
+			false !== strpos( $hook, 'emmad-settings' ) ||
 			false !== strpos( $hook, 'ehvg-settings' ) ||
 			'emmad-video-gallery-settings' === $current_page ||
 			'emmad-vg-settings' === $current_page ||
@@ -105,12 +107,15 @@ if ( ! function_exists( 'emmad_admin_assets' ) ) {
 			return;
 		}
 
+		$admin_css_ver = file_exists( EMMAD_PATH . 'assets/css/admin.css' ) ? (string) filemtime( EMMAD_PATH . 'assets/css/admin.css' ) : EMMAD_VERSION;
+		$admin_js_ver  = file_exists( EMMAD_PATH . 'assets/js/admin.js' ) ? (string) filemtime( EMMAD_PATH . 'assets/js/admin.js' ) : EMMAD_VERSION;
+
 		// Enqueue admin styles.
 		wp_enqueue_style(
 			'emmad-admin-style',
 			EMMAD_URL . 'assets/css/admin.css',
 			array(),
-			EMMAD_VERSION
+			$admin_css_ver
 		);
 
 		// Media frame and uploader script only on settings page.
@@ -121,7 +126,7 @@ if ( ! function_exists( 'emmad_admin_assets' ) ) {
 				'emmad-admin-script',
 				EMMAD_URL . 'assets/js/admin.js',
 				array( 'jquery' ),
-				EMMAD_VERSION,
+				$admin_js_ver,
 				true
 			);
 
