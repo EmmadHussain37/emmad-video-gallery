@@ -12,32 +12,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /*
 |--------------------------------------------------------------------------
-| Register & Localize Frontend Assets
+| Register & Enqueue Frontend Assets
 |--------------------------------------------------------------------------
 */
 
 if ( ! function_exists( 'emmad_register_frontend_assets' ) ) {
 	/**
-	 * Registers and localizes frontend stylesheets and scripts.
+	 * Registers and enqueues frontend stylesheets and scripts.
 	 *
 	 * @return void
 	 */
 	function emmad_register_frontend_assets() {
 
-		wp_register_style(
+		$css_ver = file_exists( EMMAD_PATH . 'assets/css/gallery.css' ) ? (string) filemtime( EMMAD_PATH . 'assets/css/gallery.css' ) : EMMAD_VERSION;
+		$js_ver  = file_exists( EMMAD_PATH . 'assets/js/gallery.js' ) ? (string) filemtime( EMMAD_PATH . 'assets/js/gallery.js' ) : EMMAD_VERSION;
+
+		wp_enqueue_style(
 			'emmad-gallery-style',
 			EMMAD_URL . 'assets/css/gallery.css',
 			array(),
-			EMMAD_VERSION
+			$css_ver
 		);
 
-		wp_register_script(
+		wp_enqueue_script(
 			'emmad-gallery-script',
 			EMMAD_URL . 'assets/js/gallery.js',
 			array(),
-			EMMAD_VERSION,
+			$js_ver,
 			true
 		);
+
+		// Backward compatibility handle aliases.
+		wp_register_style( 'ehvg-gallery', EMMAD_URL . 'assets/css/gallery.css', array(), $css_ver );
+		wp_register_script( 'ehvg-gallery', EMMAD_URL . 'assets/js/gallery.js', array(), $js_ver, true );
 
 		// Localize frontend script with translatable strings.
 		wp_localize_script(
@@ -54,21 +61,6 @@ if ( ! function_exists( 'emmad_register_frontend_assets' ) ) {
 				'externalStream' => __( 'External Video Stream', 'emmad-video-gallery' ),
 			)
 		);
-
-		// Pre-enqueue if the current post explicitly contains the shortcode.
-		if ( is_singular() ) {
-			$post = get_post();
-			if (
-				$post instanceof WP_Post &&
-				(
-					has_shortcode( $post->post_content, 'emmad_video_gallery' ) ||
-					has_shortcode( $post->post_content, 'video_gallery' )
-				)
-			) {
-				wp_enqueue_style( 'emmad-gallery-style' );
-				wp_enqueue_script( 'emmad-gallery-script' );
-			}
-		}
 
 	}
 }
@@ -145,4 +137,3 @@ if ( ! function_exists( 'emmad_admin_assets' ) ) {
 }
 
 add_action( 'admin_enqueue_scripts', 'emmad_admin_assets' );
-
