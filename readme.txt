@@ -34,9 +34,9 @@ Features an immersive fullscreen custom video player with smooth controls, live 
 
 Display your complete video gallery:
 
-`[emmad_video_gallery]`
+`[emmaviga_gallery]`
 
-(Note: Legacy shortcode `[video_gallery]` is also supported for backward compatibility).
+(Note: `[emmaviga_video_gallery]` is also supported).
 
 = Shortcode Attributes =
 
@@ -49,11 +49,11 @@ Display your complete video gallery:
 
 Display 6 videos in a 3-column grid:
 
-`[emmad_video_gallery posts="6" columns="3"]`
+`[emmaviga_gallery posts="6" columns="3"]`
 
 Display videos from specific categories without filter buttons:
 
-`[emmad_video_gallery category="tutorials" show_filters="no"]`
+`[emmaviga_gallery category="tutorials" show_filters="no"]`
 
 == Installation ==
 
@@ -75,7 +75,7 @@ Display videos from specific categories without filter buttons:
 4. Set a Featured Image as the video cover thumbnail (optional; a clean placeholder is provided if omitted).
 5. Assign Video Categories to enable frontend category filters.
 6. Click Publish.
-7. Create or edit any page and add the shortcode `[emmad_video_gallery]`.
+7. Create or edit any page and add the shortcode `[emmaviga_gallery]`.
 
 == Frequently Asked Questions ==
 
@@ -92,7 +92,7 @@ No. Emmad Video Gallery uses conditional asset loading. Scripts and stylesheets 
 Yes. When the video player modal is open, press Escape to close, Space to toggle play/pause, M to toggle mute, and Left/Right Arrow keys to seek backward or forward.
 
 = Can I use this with page builders like Elementor or Divi? =
-Yes. Simply insert a Shortcode widget or module and enter `[emmad_video_gallery]`.
+Yes. Simply insert a Shortcode widget or module and enter `[emmaviga_gallery]`.
 
 = Will my videos be deleted if I deactivate the plugin? =
 No. Deactivating the plugin preserves all your videos and categories. Content is only removed if you explicitly delete the plugin via the WordPress Plugins screen.
@@ -115,7 +115,7 @@ No. Deactivating the plugin preserves all your videos and categories. Content is
 * Hardened security: comprehensive nonces, strict capability checks, input sanitization, and contextual output escaping.
 * Fixed admin logo upload JavaScript selectors and added live preview and remove buttons.
 * Enhanced fullscreen player with touch scrubbing on mobile devices and keyboard accessibility.
-* Added backward compatibility for legacy shortcode `[video_gallery]` and existing database meta keys.
+* Fully compliant with WordPress.org prefix requirements using unique prefix emmaviga.
 * Full internationalization with included languages/emmad-video-gallery.pot.
 * PHP 8.0, 8.1, 8.2, and 8.3 compatibility verified.
 

@@ -13,13 +13,13 @@ Features an immersive fullscreen custom video player with live timeline scrubbin
 
 ## Features
 
-- **Video Gallery Management**: Dedicated `vg_video` custom post type with featured images, video URL meta box, and category taxonomy.
+- **Video Gallery Management**: Dedicated `emmaviga_video` custom post type with featured images, video URL meta box, and category taxonomy.
 - **YouTube Support**: Handles standard watch URLs, short `youtu.be` links, embeds, and YouTube Shorts.
 - **Vimeo Support**: Seamless embed for standard Vimeo links and player URLs.
 - **Self-Hosted Videos**: HTML5 playback for MP4 and WebM video files with native fullscreen player controls.
 - **Responsive Player**: Distraction-free, responsive overlay player with custom branding logo and mobile touch scrubbing.
 - **Instant Category Filtering**: Animated frontend category filter buttons without page reloads.
-- **WordPress Shortcode Support**: Clean shortcode `[emmad_video_gallery]` with customizable columns, posts count, and category filters (plus backward-compatible alias `[video_gallery]`).
+- **WordPress Shortcode Support**: Clean shortcode `[emmaviga_gallery]` (and `[emmaviga_video_gallery]`) with customizable columns, posts count, and category filters.
 - **Accessibility (WCAG Compliant)**: Full keyboard navigation (Space/K for play/pause, M for mute, Left/Right arrow keys for seek, Escape to close) and ARIA attributes for screen readers.
 - **Performance Optimized**: Assets are conditionally enqueued **only** on pages where the video gallery shortcode is executed.
 - **Secure WordPress Coding Standards**: Strict nonces, capability checks (`edit_post`, `manage_options`), input sanitization, and output escaping.
@@ -62,7 +62,7 @@ Then activate **Emmad Video Gallery** from the **Plugins** screen in your WordPr
 6. Click **Publish**.
 7. Embed the gallery anywhere using the shortcode:
    ```text
-   [emmad_video_gallery]
+   [emmaviga_gallery]
    ```
 
 ---
@@ -71,7 +71,7 @@ Then activate **Emmad Video Gallery** from the **Plugins** screen in your WordPr
 
 ### Basic Usage
 ```text
-[emmad_video_gallery]
+[emmaviga_gallery]
 ```
 
 ### Attributes
@@ -87,12 +87,12 @@ Then activate **Emmad Video Gallery** from the **Plugins** screen in your WordPr
 
 Display 6 videos in a 3-column layout:
 ```text
-[emmad_video_gallery posts="6" columns="3"]
+[emmaviga_gallery posts="6" columns="3"]
 ```
 
 Display only tutorials without filter buttons:
 ```text
-[emmad_video_gallery category="tutorials" show_filters="no"]
+[emmaviga_gallery category="tutorials" show_filters="no"]
 ```
 
 ---
@@ -115,7 +115,7 @@ emmad-video-gallery/
 │   ├── assets.php                     # Script & style registration and conditional loader
 │   └── shortcode.php                  # Gallery query and responsive player template
 ├── includes/
-│   └── post-type.php                  # Post type (vg_video) & taxonomy registration
+│   └── post-type.php                  # Post type (emmaviga_video) & taxonomy registration
 ├── assets/
 │   ├── css/
 │   │   ├── admin.css                  # Admin interface styling

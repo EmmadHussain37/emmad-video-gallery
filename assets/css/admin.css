@@ -4,16 +4,16 @@
  * @package Emmad_Video_Gallery
  */
 
-.column-emmad_vg_thumb {
+.column-emmaviga_thumb {
 	width: 80px;
 	vertical-align: middle !important;
 }
 
-.column-video_url {
+.column-emmaviga_video_url {
 	vertical-align: middle !important;
 }
 
-.emmad-vg-settings-wrap .card {
+.emmaviga-settings-wrap .card {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 	border: 1px solid #e2e8f0;
 	border-radius: 8px;

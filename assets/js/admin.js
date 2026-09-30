@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
 	'use strict';
 
 	// Handle logo upload media modal via event delegation.
-	$(document).on('click', '#emmad_upload_logo, #emmad_vg_upload_logo, #ehvg-upload-logo, #vg-upload-logo', function (e) {
+	$(document).on('click', '#emmaviga_upload_logo', function (e) {
 		e.preventDefault();
 
 		if (typeof wp === 'undefined' || !wp.media) {
@@ -16,8 +16,9 @@ jQuery(document).ready(function ($) {
 			return;
 		}
 
-		var titleText  = (window.emmadAdminData && window.emmadAdminData.mediaTitle) ? window.emmadAdminData.mediaTitle : 'Select Player Logo';
-		var buttonText = (window.emmadAdminData && window.emmadAdminData.mediaButton) ? window.emmadAdminData.mediaButton : 'Use Selected Logo';
+		var adminData  = window.emmavigaAdminData || {};
+		var titleText  = adminData.mediaTitle || 'Select Player Logo';
+		var buttonText = adminData.mediaButton || 'Use Selected Logo';
 
 		var frame = wp.media({
 			title: titleText,
@@ -34,10 +35,10 @@ jQuery(document).ready(function ($) {
 			var attachment = frame.state().get('selection').first().toJSON();
 
 			if (attachment && attachment.url) {
-				$('#emmad_player_logo, #emmad_vg_player_logo, #ehvg_player_logo, #vg_player_logo').val(attachment.url).trigger('change');
-				$('#emmad_logo_preview, #emmad_vg_logo_preview').attr('src', attachment.url);
-				$('#emmad_logo_preview_wrap, #emmad_vg_logo_preview_wrap').show();
-				$('#emmad_remove_logo, #emmad_vg_remove_logo').show();
+				$('#emmaviga_player_logo').val(attachment.url).trigger('change');
+				$('#emmaviga_logo_preview').attr('src', attachment.url);
+				$('#emmaviga_logo_preview_wrap').show();
+				$('#emmaviga_remove_logo').show();
 			}
 		});
 
@@ -45,25 +46,25 @@ jQuery(document).ready(function ($) {
 	});
 
 	// Handle logo removal via event delegation.
-	$(document).on('click', '#emmad_remove_logo, #emmad_vg_remove_logo', function (e) {
+	$(document).on('click', '#emmaviga_remove_logo', function (e) {
 		e.preventDefault();
-		$('#emmad_player_logo, #emmad_vg_player_logo, #ehvg_player_logo, #vg_player_logo').val('').trigger('change');
-		$('#emmad_logo_preview_wrap, #emmad_vg_logo_preview_wrap').hide();
-		$('#emmad_logo_preview, #emmad_vg_logo_preview').attr('src', '');
+		$('#emmaviga_player_logo').val('').trigger('change');
+		$('#emmaviga_logo_preview_wrap').hide();
+		$('#emmaviga_logo_preview').attr('src', '');
 		$(this).hide();
 	});
 
 	// Handle manual input in logo URL field.
-	$(document).on('input change', '#emmad_player_logo, #emmad_vg_player_logo', function () {
+	$(document).on('input change', '#emmaviga_player_logo', function () {
 		var val = $.trim($(this).val());
 		if (val) {
-			$('#emmad_remove_logo, #emmad_vg_remove_logo').show();
-			$('#emmad_logo_preview, #emmad_vg_logo_preview').attr('src', val);
-			$('#emmad_logo_preview_wrap, #emmad_vg_logo_preview_wrap').show();
+			$('#emmaviga_remove_logo').show();
+			$('#emmaviga_logo_preview').attr('src', val);
+			$('#emmaviga_logo_preview_wrap').show();
 		} else {
-			$('#emmad_remove_logo, #emmad_vg_remove_logo').hide();
-			$('#emmad_logo_preview_wrap, #emmad_vg_logo_preview_wrap').hide();
-			$('#emmad_logo_preview, #emmad_vg_logo_preview').attr('src', '');
+			$('#emmaviga_remove_logo').hide();
+			$('#emmaviga_logo_preview_wrap').hide();
+			$('#emmaviga_logo_preview').attr('src', '');
 		}
 	});
 });

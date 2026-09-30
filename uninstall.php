@@ -22,8 +22,7 @@ if ( ! current_user_can( 'activate_plugins' ) ) {
 |--------------------------------------------------------------------------
 */
 
-delete_option( 'emmad_vg_player_logo' );
-delete_option( 'ehvg_player_logo' ); // Legacy option cleanup.
+delete_option( 'emmaviga_player_logo' );
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +30,9 @@ delete_option( 'ehvg_player_logo' ); // Legacy option cleanup.
 |--------------------------------------------------------------------------
 */
 
-$emmad_vg_videos = get_posts(
+$emmaviga_videos = get_posts(
 	array(
-		'post_type'      => 'vg_video',
+		'post_type'      => 'emmaviga_video',
 		'post_status'    => 'any',
 		'posts_per_page' => -1,
 		'fields'         => 'ids',
@@ -41,9 +40,9 @@ $emmad_vg_videos = get_posts(
 	)
 );
 
-if ( ! empty( $emmad_vg_videos ) && is_array( $emmad_vg_videos ) ) {
-	foreach ( $emmad_vg_videos as $emmad_video_id ) {
-		wp_delete_post( $emmad_video_id, true );
+if ( ! empty( $emmaviga_videos ) && is_array( $emmaviga_videos ) ) {
+	foreach ( $emmaviga_videos as $emmaviga_video_id ) {
+		wp_delete_post( $emmaviga_video_id, true );
 	}
 }
 
@@ -53,16 +52,18 @@ if ( ! empty( $emmad_vg_videos ) && is_array( $emmad_vg_videos ) ) {
 |--------------------------------------------------------------------------
 */
 
-$emmad_vg_terms = get_terms(
-	array(
-		'taxonomy'   => 'video_category',
-		'hide_empty' => false,
-		'fields'     => 'ids',
-	)
-);
+if ( taxonomy_exists( 'emmaviga_video_category' ) ) {
+	$emmaviga_terms = get_terms(
+		array(
+			'taxonomy'   => 'emmaviga_video_category',
+			'hide_empty' => false,
+			'fields'     => 'ids',
+		)
+	);
 
-if ( ! empty( $emmad_vg_terms ) && ! is_wp_error( $emmad_vg_terms ) && is_array( $emmad_vg_terms ) ) {
-	foreach ( $emmad_vg_terms as $emmad_term_id ) {
-		wp_delete_term( $emmad_term_id, 'video_category' );
+	if ( ! empty( $emmaviga_terms ) && ! is_wp_error( $emmaviga_terms ) && is_array( $emmaviga_terms ) ) {
+		foreach ( $emmaviga_terms as $emmaviga_term_id ) {
+			wp_delete_term( $emmaviga_term_id, 'emmaviga_video_category' );
+		}
 	}
 }

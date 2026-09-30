@@ -274,8 +274,8 @@ msgstr ""
 msgid "Example"
 msgstr ""
 
-#: admin/settings.php:178
-msgid "Legacy shortcode [video_gallery] continues to work seamlessly."
+#: admin/settings.php:199
+msgid "Use [emmaviga_gallery] to embed your videos anywhere on your site."
 msgstr ""
 
 #: public/assets.php:42

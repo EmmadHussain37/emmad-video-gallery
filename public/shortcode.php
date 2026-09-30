@@ -10,18 +10,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
-	/**
-	 * Shortcode callback for [emmad_video_gallery].
-	 *
-	 * @param array $atts Shortcode attributes.
-	 * @return string HTML output.
-	 */
-	function emmad_video_gallery_shortcode( $atts ) {
+/**
+ * Shortcode callback for [emmaviga_gallery].
+ *
+ * @param array $atts Shortcode attributes.
+ * @return string HTML output.
+ */
+function emmaviga_video_gallery_shortcode( $atts ) {
 
 		// Ensure frontend assets are enqueued when shortcode is executed.
-		wp_enqueue_style( 'emmad-gallery-style' );
-		wp_enqueue_script( 'emmad-gallery-script' );
+		wp_enqueue_style( 'emmaviga-gallery-style' );
+		wp_enqueue_script( 'emmaviga-gallery-script' );
 
 		$atts = shortcode_atts(
 			array(
@@ -31,7 +30,7 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 				'show_filters' => 'yes',
 			),
 			$atts,
-			'emmad_video_gallery'
+			'emmaviga_gallery'
 		);
 
 		// Sanitize attributes.
@@ -55,7 +54,7 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 		if ( 'yes' === $show_filters ) {
 
 			$terms_args = array(
-				'taxonomy'   => 'video_category',
+				'taxonomy'   => 'emmaviga_video_category',
 				'hide_empty' => true,
 			);
 
@@ -90,7 +89,7 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 		*/
 
 		$query_args = array(
-			'post_type'              => 'vg_video',
+			'post_type'              => 'emmaviga_video',
 			'post_status'            => 'publish',
 			'posts_per_page'         => $posts_count,
 			'no_found_rows'          => true,
@@ -102,7 +101,7 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 			$slugs = array_map( 'sanitize_title', explode( ',', $category ) );
 			$query_args['tax_query'] = array(
 				array(
-					'taxonomy' => 'video_category',
+					'taxonomy' => 'emmaviga_video_category',
 					'field'    => 'slug',
 					'terms'    => $slugs,
 				),
@@ -119,14 +118,14 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 				$query->the_post();
 
 				$video_id  = get_the_ID();
-				$video_url = get_post_meta( $video_id, '_vg_video_url', true );
+				$video_url = get_post_meta( $video_id, '_emmaviga_video_url', true );
 				$thumb     = get_the_post_thumbnail_url( $video_id, 'large' );
 
 				if ( empty( $thumb ) ) {
-					$thumb = EMMAD_URL . 'assets/images/placeholder.webp';
+					$thumb = EMMAVIGA_URL . 'assets/images/placeholder.webp';
 				}
 
-				$terms   = get_the_terms( $video_id, 'video_category' );
+				$terms   = get_the_terms( $video_id, 'emmaviga_video_category' );
 				$classes = array();
 
 				if ( $terms && ! is_wp_error( $terms ) ) {
@@ -190,21 +189,15 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 		| Fullscreen Modal Video Player (Rendered once per request)
 		|--------------------------------------------------------------------------
 		*/
-		static $emmad_player_rendered = false;
+		static $emmaviga_player_rendered = false;
 
-		if ( ! $emmad_player_rendered ) {
-			$emmad_player_rendered = true;
+		if ( ! $emmaviga_player_rendered ) {
+			$emmaviga_player_rendered = true;
 
-			// Fetch player logo with fallback.
-			$logo_url = get_option( 'emmad_player_logo' );
+			// Fetch player logo.
+			$logo_url = get_option( 'emmaviga_player_logo' );
 			if ( empty( $logo_url ) ) {
-				$logo_url = get_option( 'emmad_vg_player_logo', '' );
-			}
-			if ( empty( $logo_url ) ) {
-				$logo_url = get_option( 'ehvg_player_logo', '' );
-			}
-			if ( empty( $logo_url ) ) {
-				$logo_url = EMMAD_URL . 'assets/images/default-logo.svg';
+				$logo_url = EMMAVIGA_URL . 'assets/images/default-logo.svg';
 			}
 			?>
 
@@ -218,19 +211,29 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 
 				<div class="vg-player-header">
 
-					<img
-						class="vg-player-logo"
-						src="<?php echo esc_url( $logo_url ); ?>"
-						alt="<?php esc_attr_e( 'Player Logo', 'emmad-video-gallery' ); ?>"
-					/>
+					<div class="vg-header-left" aria-hidden="true"></div>
 
-					<button
-						type="button"
-						class="vg-close"
-						aria-label="<?php esc_attr_e( 'Close video player', 'emmad-video-gallery' ); ?>"
-					>
-						<?php esc_html_e( 'CLOSE', 'emmad-video-gallery' ); ?>
-					</button>
+					<div class="vg-header-center">
+						<img
+							class="vg-player-logo"
+							src="<?php echo esc_url( $logo_url ); ?>"
+							alt="<?php esc_attr_e( 'Player Logo', 'emmad-video-gallery' ); ?>"
+						/>
+					</div>
+
+					<div class="vg-header-right">
+						<button
+							type="button"
+							class="vg-close"
+							aria-label="<?php esc_attr_e( 'Close video player', 'emmad-video-gallery' ); ?>"
+						>
+							<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+							<span><?php esc_html_e( 'CLOSE', 'emmad-video-gallery' ); ?></span>
+						</button>
+					</div>
 
 				</div>
 
@@ -333,8 +336,7 @@ if ( ! function_exists( 'emmad_video_gallery_shortcode' ) ) {
 		return ob_get_clean();
 
 	}
-}
 
-// Register shortcodes.
-add_shortcode( 'emmad_video_gallery', 'emmad_video_gallery_shortcode' );
-add_shortcode( 'video_gallery', 'emmad_video_gallery_shortcode' );
+// Register shortcode [emmaviga_gallery].
+add_shortcode( 'emmaviga_gallery', 'emmaviga_video_gallery_shortcode' );
+add_shortcode( 'emmaviga_video_gallery', 'emmaviga_video_gallery_shortcode' );

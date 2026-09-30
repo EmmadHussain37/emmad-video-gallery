@@ -26,10 +26,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 |--------------------------------------------------------------------------
 */
 
-define( 'EMMAD_VERSION', '1.0.0' );
-define( 'EMMAD_FILE', __FILE__ );
-define( 'EMMAD_PATH', plugin_dir_path( __FILE__ ) );
-define( 'EMMAD_URL', plugin_dir_url( __FILE__ ) );
+define( 'EMMAVIGA_VERSION', '1.0.0' );
+define( 'EMMAVIGA_FILE', __FILE__ );
+define( 'EMMAVIGA_PATH', plugin_dir_path( __FILE__ ) );
+define( 'EMMAVIGA_URL', plugin_dir_url( __FILE__ ) );
 
 /*
 |--------------------------------------------------------------------------
@@ -37,12 +37,12 @@ define( 'EMMAD_URL', plugin_dir_url( __FILE__ ) );
 |--------------------------------------------------------------------------
 */
 
-require_once EMMAD_PATH . 'includes/post-type.php';
-require_once EMMAD_PATH . 'admin/meta-box.php';
-require_once EMMAD_PATH . 'admin/admin-columns.php';
-require_once EMMAD_PATH . 'admin/settings.php';
-require_once EMMAD_PATH . 'public/assets.php';
-require_once EMMAD_PATH . 'public/shortcode.php';
+require_once EMMAVIGA_PATH . 'includes/post-type.php';
+require_once EMMAVIGA_PATH . 'admin/meta-box.php';
+require_once EMMAVIGA_PATH . 'admin/admin-columns.php';
+require_once EMMAVIGA_PATH . 'admin/settings.php';
+require_once EMMAVIGA_PATH . 'public/assets.php';
+require_once EMMAVIGA_PATH . 'public/shortcode.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -50,30 +50,26 @@ require_once EMMAD_PATH . 'public/shortcode.php';
 |--------------------------------------------------------------------------
 */
 
-if ( ! function_exists( 'emmad_activate' ) ) {
-	/**
-	 * Fired on plugin activation.
-	 *
-	 * @return void
-	 */
-	function emmad_activate() {
-		emmad_register_post_type();
-		emmad_register_taxonomy();
-		flush_rewrite_rules();
-	}
+/**
+ * Fired on plugin activation.
+ *
+ * @return void
+ */
+function emmaviga_activate() {
+	emmaviga_register_post_type();
+	emmaviga_register_taxonomy();
+	flush_rewrite_rules();
 }
 
-register_activation_hook( __FILE__, 'emmad_activate' );
+register_activation_hook( __FILE__, 'emmaviga_activate' );
 
-if ( ! function_exists( 'emmad_deactivate' ) ) {
-	/**
-	 * Fired on plugin deactivation.
-	 *
-	 * @return void
-	 */
-	function emmad_deactivate() {
-		flush_rewrite_rules();
-	}
+/**
+ * Fired on plugin deactivation.
+ *
+ * @return void
+ */
+function emmaviga_deactivate() {
+	flush_rewrite_rules();
 }
 
-register_deactivation_hook( __FILE__, 'emmad_deactivate' );
+register_deactivation_hook( __FILE__, 'emmaviga_deactivate' );
